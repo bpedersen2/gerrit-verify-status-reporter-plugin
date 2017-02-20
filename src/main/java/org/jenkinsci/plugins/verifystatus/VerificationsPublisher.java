@@ -251,7 +251,9 @@ public class VerificationsPublisher extends Publisher implements SimpleBuildStep
         data.category = inCategory;
       }
 
-      if (result != null) {
+      if (verifyStatusValue != null) {
+	data.value = verifyStatusValue;
+      } else if (result != null) {
       // determine the vote value from build result
         if (result.isWorseOrEqualTo(Result.FAILURE)) {
           data.value = -1;
@@ -260,8 +262,6 @@ public class VerificationsPublisher extends Publisher implements SimpleBuildStep
         } else {
           data.value = 1;
         }
-      } else if (verifyStatusValue != null) {
-	data.value = verifyStatusValue;
       } else {
 	data.value = 0;
       }
